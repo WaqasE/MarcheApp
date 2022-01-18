@@ -2,6 +2,7 @@ import AppText from './AppText';
 import AppLoading from './AppLoading';
 import AppIconButton from './AppIconButton';
 import AppButton from './AppButton';
+import AppTextButton from './AppTextButton';
 import AppScreen from './AppScreen';
 import AppHeader from './AppHeader';
 import AppDonut from './AppDonut';
@@ -15,4 +16,5 @@ import AppBid from './AppBid';
 import AppProfileItem from './AppProfileItem';
 import AppMinimalCard from './AppMinimalCard';
 import AppWideCard from './AppWideCard';
-export { AppText, AppLoading, AppIconButton, AppButton, AppScreen, AppHeader, AppDonut, AppInboxChat, AppChatHeader, AppChatInput, AppChat, AppTextFieldPopup, AppTextInput, AppBid, AppProfileItem, AppMinimalCard, AppWideCard };
+import AppErrorToast from './AppErrorToast'
+export { AppText, AppLoading, AppTextButton, AppIconButton, AppButton, AppScreen, AppHeader, AppDonut, AppInboxChat, AppChatHeader, AppChatInput, AppChat, AppTextFieldPopup, AppTextInput, AppBid, AppProfileItem, AppMinimalCard, AppWideCard, AppErrorToast };

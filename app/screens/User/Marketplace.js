@@ -2,26 +2,29 @@ import React, { useContext } from 'react';
 import { FlatList, StyleSheet, TouchableWithoutFeedback, View, Image, ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+import Marche from '../../assets/svgs/Icon'
+
 
 import { AppScreen, AppHeader, AppText, AppMinimalCard, AppWideCard } from '../../components/'
 import UserContext from '../../context/UserContext';
 import Colors from '../../config/Colors';
 import { width, height } from '../../functions/Dimensions'
+import { SvgXml } from 'react-native-svg';
 
 const popArtist = [{ id: 1, profilePicture: 'https://res.cloudinary.com/marcheplatform/image/upload/v1639354263/profilepictures/61b68f820fdbe545c5a99131_c4hmbx.jpg', name: 'ehmed' }, { id: 2, profilePicture: '', name: 'saad' }, { id: 4, profilePicture: '', name: 'wasiq' }, { id: 5, profilePicture: '', name: 'tooba' }, { id: 6, profilePicture: '', name: 'suhaib' }, { id: 7, profilePicture: '', name: 'shams' },]
 const products = [
-    { id: 1, },
-    { id: 2, },
-    { id: 3, },
-    { id: 4, },
-    { id: 5, },
-    { id: 6, },
-    { id: 7, },
-    { id: 8, },
-    { id: 9, },
-    { id: 10, },
-    { id: 11, },
-    { id: 12, },
+    { id: 1, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641746414/gigs/xtdw4towulcnmex4xany.jpg' },
+    { id: 2, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641746735/gigs/esgdd9t5qoprb7vxpkh0.jpg' },
+    { id: 3, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641744521/gigs/f8ewftrn3a16rseawblg.jpg' },
+    { id: 4, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641767435/gigs/clbnhzomgtwfafeqgox6.jpg' },
+    { id: 5, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641767760/gigs/vi9duysg4imkvrg4xlcr.jpg' },
+    { id: 6, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641744875/gigs/jtdtxrrkrsj4qgbseirx.jpg' },
+    { id: 7, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641769063/gigs/fiphwcwfbr8skkpo4y6f.jpg' },
+    { id: 8, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641769660/gigs/hcs0bfikliyyds0fbrjn.jpg' },
+    { id: 9, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641745602/gigs/wq6cnk5jbidf7zrshepz.jpg' },
+    { id: 10, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641770038/gigs/u8kpwya8zfelmerppm6r.jpg' },
+    { id: 11, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641770329/gigs/yighjwulfbfcow1cykha.jpg' },
+    { id: 12, thumbnail: 'https://res.cloudinary.com/marcheplatform/image/upload/v1641769486/gigs/czsba6jzom4yopxje196.jpg' },
 ]
 
 export default function Marketplace() {
@@ -44,7 +47,7 @@ export default function Marketplace() {
                             </View>
                     }
                 </AppHeader>
-                <ScrollView style={styles.wrapper}>
+                <ScrollView style={styles.wrapper} showsVerticalScrollIndicator={false} >
                     <View style={styles.popProfileWrap}>
                         <AppText style={styles.heading}>Popular Profiles</AppText>
                         <FlatList
@@ -52,6 +55,7 @@ export default function Marketplace() {
                             nestedScrollEnabled
                             keyExtractor={(item) => item.id.toString()}
                             style={{ marginTop: 15 }}
+                            showsHorizontalScrollIndicator={false}
                             scrollEnabled
                             horizontal
                             renderItem={({ item, index }) => (
@@ -74,12 +78,13 @@ export default function Marketplace() {
                         <AppText style={styles.heading}>Discover</AppText>
                         <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 }}>
                             {
-                                products.map(({ id }, i) => (
-                                    <View key={i} style={i % 3 === 0 ? styles.wideCard : styles.minimalCard}>
+                                products.map(({ id, thumbnail }, i) => (
+                                    <View key={i} style={id % 3 === 0 ? styles.wideCard : styles.minimalCard}>
+                                        <SvgXml xml={Marche} style={{ position: 'absolute', alignSelf: 'center' }} width={30} height={30} />
                                         {
                                             id % 3 === 0 ?
-                                                <AppWideCard /> :
-                                                <AppMinimalCard />}
+                                                <AppWideCard thumbnail={thumbnail} /> :
+                                                <AppMinimalCard thumbnail={thumbnail} />}
                                     </View>
                                 ))
                             }
@@ -144,14 +149,29 @@ const styles = StyleSheet.create({
     },
     wideCard: {
         width: '100%',
-        height: 250,
-        marginVertical: 10,
+        maxHeight: 250,
+        marginVertical: 5,
+        position: 'relative',
+        justifyContent: 'center',
+        backgroundColor: Colors['white'],
+        elevation: 3,
+        borderRadius: 10,
+
 
     },
     minimalCard: {
         width: '49%',
         height: 250,
-        marginVertical: 10,
+        marginVertical: 5,
+        position: 'relative',
+        justifyContent: 'center',
+        backgroundColor: Colors['white'],
+        elevation: 2,
+        borderRadius: 10,
+
+
+
+
 
     }
 });

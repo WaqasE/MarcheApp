@@ -1,12 +1,18 @@
 import React from 'react';
-import {  StyleSheet,View } from 'react-native';
+import LottieView from 'lottie-react-native';
 
-export default function AppLoading()  {
+export default function AppLoading({ visible = false })  {
+    if(!visible) return null
     return  (
-        <View style={styles.container}></View>
-     );
+        <LottieView
+            autoPlay    
+            loop
+            style={{
+            width: 40,
+            height: 40,
+            alignSelf:'center',
+            paddingTop:2,
+            }}
+            source={require('../assets/animations/loading.json')}/>
+    );
 }
-
-const styles = StyleSheet.create({
-    container:{}
- });

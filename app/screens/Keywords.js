@@ -1,36 +1,34 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { AppHeader, AppScreen, AppText, AppButton } from '../components';
+import { AppHeader, AppScreen, AppText, AppButton, AppLoading } from '../components';
 import { height, width } from '../functions/Dimensions';
 import Colors from '../config/Colors';
+import { KeywordsReq } from '../api/'
 
 
 const skills = [{ id: 1, title: 'Elctronics' }, { id: 2, title: 'Stocks' }, { id: 3, title: 'AI' }, { id: 4, title: 'Illustrations' }, { id: 5, title: 'Interior design' }, { id: 6, title: 'Mobile Apps' }, { id: 7, title: 'Crypto' }, { id: 8, title: 'UI/UX' }, { id: 9, title: 'Web Apps' }, { id: 10, title: 'Cyber Security' }, { id: 11, title: 'Portraits' }, { id: 12, title: 'Finance' }, { id: 13, title: 'Mechanics' }, { id: 14, title: 'Pyschology' }, { id: 15, title: 'Medical' }, { id: 16, title: 'Inovation' },]
 
-export default function Keywords({ navigation, keywords, setKeywords }) {
+export default function Keywords({ navigation }) {
     const [skillsSelected, setSkillsSelected] = useState([]);
+    const [loading, setLoading] = useState(false);
     const skillsHandler = (title) => {
-        if (keywords !== null) {
-            const exist = keywords.indexOf(title);
-            if (exist === -1) {
-                setKeywords([...skillsSelected, title])
-            }
-            else {
-                const data = keywords;
-                data.splice(exist, 1)
-                setKeywords([...data])
-            }
+        const exist = skillsSelected.indexOf(title);
+        if (exist === -1) {
+            setSkillsSelected([...skillsSelected, title])
         }
         else {
-            const exist = skillsSelected.indexOf(title);
-            if (exist === -1) {
-                setSkillsSelected([...skillsSelected, title])
-            }
-            else {
-                const data = skillsSelected;
-                data.splice(exist, 1)
-                setSkillsSelected([...data])
-            }
+            const data = skillsSelected;
+            data.splice(exist, 1)
+            setSkillsSelected([...data])
+        }
+    }
+
+    const keywordsPush = async () => {
+        if (skillsSelected.length > 0) {
+            setLoading(true);
+            const doc = await KeywordsReq(skillsSelected);
+            setLoading(false);
+            navigation.navigate('Role');
         }
     }
 
@@ -46,7 +44,12 @@ export default function Keywords({ navigation, keywords, setKeywords }) {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <AppButton title='Continue' styleText={{ color: Colors.light }} style={{ width: width - 60, backgroundColor: Colors.primary, height: 50, borderRadius: 10 }} onPress={() => navigation.goBack()} />
+                    {loading ?
+                        <View style={[styles.loadWrapper, { backgroundColor: Colors.primary }]}>
+                            <AppLoading visible={true} />
+                        </View>
+                        :
+                        <AppButton disabled={!skillsSelected.length > 0} title='Continue' styleText={{ color: skillsSelected.length > 0 ? Colors.light : Colors.dark }} style={{ width: width - 60, backgroundColor: skillsSelected.length > 0 ? Colors.primary : '#d1d1d1', height: 50, borderRadius: 10, marginTop: 20 }} onPress={keywordsPush} />}
                 </View>
             </View>
         </AppScreen>
@@ -66,6 +69,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         paddingHorizontal: 30,
+    },
+    loadWrapper: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: 20,
     },
     keyword: {
         fontSize: 15,

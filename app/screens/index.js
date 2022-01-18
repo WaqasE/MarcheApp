@@ -3,6 +3,7 @@ import Login from './Login';
 import ProfilePicture from './ProfilePicture';
 import Signup from './Signup';
 import Welcome from './Welcome';
+import Role from './Role';
 
 // --------------------Mutual--------------------
 import Inbox from './Inbox';
@@ -24,4 +25,4 @@ import ProfileSeller from './Seller/Profile';
 
 
 
-export { Keywords, Login, ProfilePicture, Signup, Welcome, Marketplace, Inbox, Chat, Search, Products, Profile, HomeSeller, BidsSeller, GigsSeller, ProfileSeller };
+export { Keywords, Login, ProfilePicture, Signup, Welcome, Marketplace, Inbox, Chat, Search, Products, Profile, HomeSeller, BidsSeller, GigsSeller, ProfileSeller, Role };

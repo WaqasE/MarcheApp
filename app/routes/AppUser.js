@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -11,6 +13,15 @@ import AppInbox from './AppInbox';
 
 export default function AppUser() {
 
+      const tabBarHandler = (route) => {
+        if (getFocusedRouteNameFromRoute(route) === 'Chat' || route.name === 'Search') {
+            return 'none'
+        }
+        else {
+            return 'flex'
+        }
+    }
+
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -18,7 +29,7 @@ export default function AppUser() {
                 tabBarActiveTintColor: Colors['primary'],
                 tabBarInactiveTintColor: Colors['inActive'],
                 headerShown: false,
-                tabBarStyle: { height: 60 },
+                tabBarStyle: { height: 60, display: tabBarHandler(route) },
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 

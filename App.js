@@ -8,8 +8,9 @@ import UserStorage from './app/context/UserStorage';
 import { AppAuth, AppSeller, AppUser } from './app/routes/'
 
 export default function App() {
-  const [user, setUser] = useState({
-    role: 'user',
+  const [user, setUser] = useState(
+    {
+    role: 'seller',
     profilePicture: 'https://res.cloudinary.com/marcheplatform/image/upload/v1639354263/profilepictures/61b68f820fdbe545c5a99131_c4hmbx.jpg',
     status: 'online',
     balance: '0',
@@ -24,8 +25,9 @@ export default function App() {
     unreadMsgs: 1,
     name: 'waqas',
     username: 'beingGrey',
-    joined:'Jun 9, 2021'
-  });
+    joined: 'Jun 9, 2021'
+  }
+  );
   const [isReady, setIsReady] = useState(false)
 
   const onStart = async () => {

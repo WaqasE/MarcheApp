@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-import { Keywords, Login, ProfilePicture, Signup, Welcome } from '../screens/'
+import { Keywords, Login, ProfilePicture, Signup, Welcome, Role } from '../screens/'
 
 export default function AppAuth() {
     return (
@@ -12,6 +12,7 @@ export default function AppAuth() {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Keywords" component={Keywords} />
             <Stack.Screen name="ProfilePicture" component={ProfilePicture} />
+            <Stack.Screen name="Role" component={Role} />
         </Stack.Navigator>
     );
 }

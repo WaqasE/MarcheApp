@@ -4,9 +4,9 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import AppText from './AppText';
 
 
-export default function AppButton({ title, onPress, style, styleText }) {
+export default function AppButton({ title, disabled,onPress, style, styleText }) {
     return (
-        <TouchableWithoutFeedback onPress={onPress}>
+        <TouchableWithoutFeedback disabled={disabled} onPress={onPress}>
             <View style={[styles.container, style]}>
                 <AppText style={styleText}>{title}</AppText>
             </View>
